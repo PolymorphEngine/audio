@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 set(CMAKE_CXX_STANDARD 20)
 set(EXECUTABLE_OUTPUT_PATH ../)
 
-project(plugin-template)
+project(audio)
 set(NAMESPACE polymorph)
 
 if (${CMAKE_SOURCE_DIR} EQUAL ${PROJECT_NAME})
@@ -19,6 +19,8 @@ endif()
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 
 include(cmake/FindPolymorphEngine.cmake)
+include(cmake/FindRenderModules.cmake)
+
 
 file(GLOB_RECURSE SCRIPTS_SRC scripts/src/*.cpp)
 file(GLOB_RECURSE SCRIPTS_ICL scripts/include/*.hpp)
@@ -29,6 +31,7 @@ file(GLOB_RECURSE FACTORY_ICL factory/include/*.hpp)
 file(GLOB_RECURSE CORE_SRC core/src/*.cpp)
 file(GLOB_RECURSE CORE_ICL core/include/*.hpp)
 file(GLOB_RECURSE EXPORTS includeExport/*.hpp)
+get_target_property(render_module_include render-modules INCLUDE_DIRECTORIES)
 
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
@@ -41,6 +44,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 )
 target_include_directories(${PROJECT_NAME} PUBLIC
         includeExport
+        ${render_module_include}
 )
 
 target_link_libraries(${PROJECT_NAME} PolymorphEngine)
