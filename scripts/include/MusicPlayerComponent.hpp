@@ -6,7 +6,7 @@
 #pragma once
 
 #include "polymorph/engine/core/component/AComponent.hpp"
-#include "modules/MusicModule.hpp"
+#include "../core/include/modules/MusicModule.hpp"
 
 namespace polymorph::engine::audio
 {
