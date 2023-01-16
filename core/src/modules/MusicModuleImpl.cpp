@@ -4,7 +4,7 @@
 */
 
 #include "modules/MusicModuleImpl.hpp"
-
+#include <polymorph/engine/api.hpp>
 #include <utility>
 
 polymorph::engine::audio::MusicModule::MusicModule(safe_ptr<AComponent> component,
@@ -118,5 +118,6 @@ void polymorph::engine::audio::MusicModuleImpl::saveAll()
 void polymorph::engine::audio::MusicModuleImpl::_loadModule()
 {
     _c_music = _plugin.getSymbol<polymorph::audio::Symbols::createMusicDEF>(polymorph::audio::Symbols::createMusic);
+    _filePath = this->_plugin.getAssetManager().tryResolve(_filePath);
     _music = std::unique_ptr<polymorph::audio::IMusic>(_c_music(_filePath));
 }
