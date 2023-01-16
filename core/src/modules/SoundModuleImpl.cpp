@@ -94,6 +94,7 @@ void polymorph::engine::audio::SoundModuleImpl::playMulti()
 void polymorph::engine::audio::SoundModuleImpl::_loadModule()
 {
     _c_sound = _plugin.getSymbol<polymorph::audio::Symbols::createSoundDEF>(polymorph::audio::Symbols::createSound);
+    _filePath = _plugin.getAssetManager().tryResolve(_filePath);
     _sound = std::unique_ptr<polymorph::audio::ISound>(_c_sound(_filePath));
 }
 
